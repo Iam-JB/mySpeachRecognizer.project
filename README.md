@@ -1,0 +1,1 @@
+# mySpeachRecognizer.project
