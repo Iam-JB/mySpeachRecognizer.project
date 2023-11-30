@@ -12,7 +12,8 @@ public:
     ~LEDMatrixController();
 
     // Fonctions
-    void setupMatrix();
+  void setupMatrix();
+  void Turn_on_the_TV();
 
 };
 
