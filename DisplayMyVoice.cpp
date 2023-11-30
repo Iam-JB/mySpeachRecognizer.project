@@ -5,10 +5,11 @@ using namespace std ;
 
 int DisplayMyVoice() {
   try {
-    
     // Création d'une instance de reconnaissance de commandes vocales
-    VoiceRecognizer(2,3) ;
-
+    VR = new VoiceRecognizer(2,3) ;
+    
+    // Création d'une instance de matrice de LED
+    LED = new LEDMatrixController(&VR) ;
   }
   catch (1) {
     cout << "Aucune commande lue." << endl ;
