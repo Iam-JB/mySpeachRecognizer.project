@@ -50,21 +50,31 @@ void LEDMatrixController::Turn_on_the_TV(){
 
 void LEDMatrixController::Turn_on_the_light() {
 
-  int cmd = 1;
-  uint64_t Light_displayed[] = Light[] ;
+      int cmd = 1;
+      uint64_t Light_displayed[] = {0,0,0,0,0,0,0,0} ;
+      
+      for (int i=0;i<8;i++){
+        Light_displayed[i]= Light[i]; // Initialisation de Light_displayed à la valeur de Light
+      }
+
       while (cmd != Turn_off_the_light) {
-        if (cmd == Decrease_temperature) { // faudra il surcharger ==, < et > pour les uint64_t ? 
-          if ( Light_displayed > Light_min){
-            Light_displayed -= Light_increment;
+        if (cmd == Decrease_temperature) {
+          if (Light_displayed[0]!=Light_min){ // on peut comarer seulement la première ligne du tableau car les valeurs de toutes les lignes sont identiques
+            for (int i=0;i<8;i++){
+              Light_displayed[i] -= Light_increment;
+            }
           }
         }
         if (cmd == Increase_temperature) { 
-          if ( Light_displayed < Light_max){
-            Light_displayed += Light_increment;
+          if (Light_displayed[0]!=Light_max){
+            for (int i=0;i<8;i++){
+              Light_displayed[i] += Light_increment;
+            }
           }
         }
-        cmd = this.getCommand(); // il faut une instance de voice recognizer
-        
+        cmd = this.getCommand();
       }
+    }
+        
 
 }
