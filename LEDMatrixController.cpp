@@ -1,7 +1,7 @@
 #include <LEDMatrixController.h>
 
-LEDMatrixController::LEDMatrixController() {
-    // Constructeur
+LEDMatrixController::LEDMatrixController(VoiceRecognizer* VR) {
+  this->MyVoiceRecognizer = VR;
 }
 
 LEDMatrixController::~LEDMatrixController() {
@@ -43,7 +43,7 @@ void LEDMatrixController::Turn_on_the_TV(){
       }
     }
     matrix.displayColorAnimation(animation_index, 5000, false);
-    cmd = VoiceRecognizer::getCommand(); // il faut une instance de voice recognizer
+    cmd = this.getCommand(); // il faut une instance de voice recognizer
   }
       
 }
@@ -63,7 +63,7 @@ void LEDMatrixController::Turn_on_the_light() {
             Light_displayed += Light_increment;
           }
         }
-        cmd = VoiceRecognizer::getCommand(); // il faut une instance de voice recognizer
+        cmd = this.getCommand(); // il faut une instance de voice recognizer
         
       }
 

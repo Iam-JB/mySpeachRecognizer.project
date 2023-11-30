@@ -5,10 +5,11 @@
 
 class LEDMatrixController {
 private:
-    GroveTwoRGBLedMatrixClass matrix;
+  GroveTwoRGBLedMatrixClass matrix;
+  VoiceRecognizer* MyVoiceRecognizer ;
 public:
     // Constructeur & Destructeur
-    LEDMatrixController();
+    LEDMatrixController(VoiceRecognizer* VR);
     ~LEDMatrixController();
 
     // Fonctions
