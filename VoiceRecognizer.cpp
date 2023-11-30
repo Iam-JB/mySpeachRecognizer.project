@@ -14,5 +14,8 @@ int VoiceRecongizer::getCommand() {
     {
         cmd = softSerial.read();
     }
+    else {
+      throw 1 ;
+    }
     return cmd ; // Traiter une exception si on ne passe pas dans le if
 }
