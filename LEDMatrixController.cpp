@@ -1,7 +1,7 @@
 #include <LEDMatrixController.h>
 
-LEDMatrixController::LEDMatrixController() {
-    // Constructeur
+LEDMatrixController::LEDMatrixController(VoiceRecognizer* VR) {
+  this->MyVoiceRecognizer = VR;
 }
 
 LEDMatrixController::~LEDMatrixController() {
