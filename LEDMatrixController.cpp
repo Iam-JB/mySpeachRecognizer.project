@@ -59,7 +59,7 @@ void LEDMatrixController::Turn_on_the_light() {
 
       while (cmd != Turn_off_the_light) {
         if (cmd == Decrease_temperature) {
-          if (Light_displayed[0]!=Light_min){ // on peut comarer seulement la première ligne du tableau car les valeurs de toutes les lignes sont identiques
+          if (Light_displayed[0]!=Light_min){ // on peut comparer seulement la première ligne du tableau car les valeurs de toutes les lignes sont identiques
             for (int i=0;i<8;i++){
               Light_displayed[i] -= Light_increment;
             }
