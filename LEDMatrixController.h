@@ -14,6 +14,7 @@ public:
     // Fonctions
   void setupMatrix();
   void Turn_on_the_TV();
+  void Turn_on_the_light();
 
 };
 

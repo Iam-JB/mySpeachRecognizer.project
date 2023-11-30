@@ -43,8 +43,28 @@ void LEDMatrixController::Turn_on_the_TV(){
       }
     }
     matrix.displayColorAnimation(animation_index, 5000, false);
-    VoiceRecognizer::getCommand(); // il faut une instance de voice recognizer
+    cmd = VoiceRecognizer::getCommand(); // il faut une instance de voice recognizer
   }
       
+}
+
+void LEDMatrixController::Turn_on_the_light() {
+
+  int cmd = 1;
+  uint64_t Light_displayed[] = Light[] ;
+      while (cmd != Turn_off_the_light) {
+        if (cmd == Decrease_temperature) { // faudra il surcharger ==, < et > pour les uint64_t ? 
+          if ( Light_displayed > Light_min){
+            Light_displayed -= Light_increment;
+          }
+        }
+        if (cmd == Increase_temperature) { 
+          if ( Light_displayed < Light_max){
+            Light_displayed += Light_increment;
+          }
+        }
+        cmd = VoiceRecognizer::getCommand(); // il faut une instance de voice recognizer
+        
+      }
 
 }
