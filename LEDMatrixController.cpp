@@ -1,4 +1,4 @@
-#include <LEDMatrixController.h>
+#include "LEDMatrixController.h"
 
 const uint64_t Emoji[] = 
 {
@@ -18,7 +18,7 @@ const uint64_t Carre[] = {
 };
 const int CARRE_LEN = sizeof(Carre)/8;
 
-const uint64_t* animation[] = { Emoji[], Carre[] };
+const uint64_t* animation[] = { Emoji, Carre };
 
 LEDMatrixController::LEDMatrixController(VoiceRecognizer* VR) {
   this->MyVoiceRecognizer = VR;
@@ -57,10 +57,12 @@ void LEDMatrixController::Turn_on_the_TV(){
         animation_index--; 
       }
     }
-    int Animation_Len = sizeof(*Animation[animation_index])/8;
+    int Animation_Len = sizeof(Animation[animation_index])/8;
     for (int i = 0;i < Animation_Len;i++){ // i dépend du nombre d'images de l'animation !
-        matrix.writeOnePicture(*Animation[animation_index]); // comment mettre l'animation i de l'emplacement pointé par Animation[] ? avec un *
-        delay(500);
+
+        matrix.writeOnePicture(Animation[animation_index][i]); // comment mettre l'animation i de l'emplacement pointé par Animation[] ?
+	display();
+	delay(300);
         }
     cmd = this.getCommand(); // il faut une instance de voice recognizer
   }
@@ -85,6 +87,7 @@ void LEDMatrixController::Turn_on_the_light() {
         }
         matrix.setBrightness(brightness);
         matrix.writeOnePicture(0xffffffffffffffff);
+	display();
 
 	cmd = this.getCommand();
       }
@@ -94,3 +97,66 @@ void LEDMatrixController::Turn_on_the_light() {
     matrix.writeOnePicture(0x0) ;
     display() ;
  }
+
+//Control Vocal
+    if ( cmd == Mode_1){
+      uint8_t x=0;
+      uint8_t y=0;
+
+      while ( cmd != Stop ){
+        if (cmd == Go){
+          matrix.writePixel(x,y,true);
+          display();
+        }
+        else {
+          //blink : permet de repérer le curseur
+          matrix.writePixel(x,y,true);
+          display();
+          delay(100);
+          matrix.writePixel(x,y,false);
+          display();
+          delay(50);
+        }
+
+        cmd = this.getCommand();
+
+        // Règle x si on veut déplacer le curseur à gauche
+        if ( cmd == Left){
+          if (x != 0){
+            x--;
+          }
+          else {
+            x = 7;
+          }
+        }
+        // Règle x si on veut déplacer le curseur à droite
+        if ( cmd == Right){
+          if (x != 7){
+            x++;
+          }
+          else {
+            x = 0;
+          }
+        }
+        // Règle y si on veut déplacer le curseur en haut
+        if ( cmd == Up){
+          if (y != 0){
+            y--;
+          }
+          else {
+            y = 7;
+          }
+        }
+
+        // Règle y si on veut déplacer le curseur en bas
+        if ( cmd == Down){
+          if (y != 7){
+            y++;
+          }
+          else {
+            y = 0;
+          }
+        }
+
+      }
+    }
