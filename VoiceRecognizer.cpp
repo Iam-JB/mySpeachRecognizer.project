@@ -1,4 +1,4 @@
-#include <VoiceRecognizer.h>
+#include "VoiceRecognizer.h"
 
 VoiceRecognizer::VoiceRecognizer(int rxPin, int txPin) : softSerial(rxPin, txPin), cmd(0) {
     softSerial.begin(9600);
