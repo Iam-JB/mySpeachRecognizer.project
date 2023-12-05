@@ -59,7 +59,7 @@ void LEDMatrixController::Turn_on_the_TV(){
     }
     int Animation_Len = sizeof(*Animation[animation_index])/8;
     for (int i = 0;i < Animation_Len;i++){ // i dépend du nombre d'images de l'animation !
-        matrix.writeOnePicture(*Animation[animation_index]); // comment mettre l'animation i de l'emplacement pointé par Animation[] ?
+        matrix.writeOnePicture(*Animation[animation_index]); // comment mettre l'animation i de l'emplacement pointé par Animation[] ? avec un *
         delay(500);
         }
     cmd = this.getCommand(); // il faut une instance de voice recognizer
@@ -76,7 +76,6 @@ void LEDMatrixController::Turn_on_the_light() {
         if (cmd == Decrease_temperature) {
           if (brightness != 0){
            brightness-- ;
-
           }
         }
         if (cmd == Increase_temperature) { 
@@ -90,5 +89,8 @@ void LEDMatrixController::Turn_on_the_light() {
 	cmd = this.getCommand();
       }
     }
-        
+    brightness = 1 ; // Fonctionnalité éteindre la lumière
+    matrix.setBrightness(brightness);
+    matrix.writeOnePicture(0x0) ;
+    display() ;
  }
