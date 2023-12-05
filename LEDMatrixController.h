@@ -18,6 +18,7 @@ public:
   void setupMatrix();
   void Turn_on_the_TV();
   void Turn_on_the_light();
+  void Voice_drawing();
 
 };
 
