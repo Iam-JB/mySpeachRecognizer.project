@@ -1,29 +1,5 @@
 #include "LEDMatrixController.h"
 
-// Définition des commandes possibles
-#define Turn_on_the_light 1
-#define Turn_off_the_light 2
-#define PLay_music 3
-#define Pause 4
-#define Next 5
-#define Previous 6
-#define Up 7
-#define Down 8
-#define Turn_on_the_TV 9
-#define Turn_off_the_TV 10
-#define Increase_temperature 11
-#define Decrease_temperature 12
-#define What_is_the_time 13
-#define Open_the_door 14
-#define Close_the_door 15
-#define Left 16
-#define Right 17
-#define Stop 18
-#define Start 19
-#define Mode_1 20
-#define Mode_2 21
-#define Go 22
-
 const uint64_t Emoji[] = 
 {
   0x3c4299a581a5423c,
@@ -57,10 +33,9 @@ void LEDMatrixController::setupMatrix() {
     matrix.init();
     matrix.setBrightness(0);
     matrix.setBlinkRate(BLINK_OFF);
-    SERIAL.println("Matrix init success!!!");
 }
 
-void LEDMatrixController::Turn_on_the_TV(){
+void LEDMatrixController::Turn_on_TV(){
 
   int cmd = 9;
   int animation_index = 0; 
@@ -81,22 +56,22 @@ void LEDMatrixController::Turn_on_the_TV(){
         animation_index--; 
       }
     }
-    int Animation_Len = sizeof(Animation[animation_index])/8;
+    int Animation_Len = sizeof(animation[animation_index])/8;
     for (int i = 0;i < Animation_Len;i++){ // i dépend du nombre d'images de l'animation !
 
-        matrix.writeOnePicture(Animation[animation_index][i]); // comment mettre l'animation i de l'emplacement pointé par Animation[] ?
-	display();
-	delay(300);
-        }
-    cmd = this.getCommand(); // il faut une instance de voice recognizer
+      matrix.writeOnePicture(animation[animation_index][i]); // comment mettre l'animation i de l'emplacement pointé par Animation[] ?
+	    matrix.display();
+	    delay(300);
+    }
+    cmd = this->getCommand(); // il faut une instance de voice recognizer
   }
       
 }
 
-void LEDMatrixController::Turn_on_the_light() {
+void LEDMatrixController::Turn_on_light() {
 
       int cmd = 1;
-      brightness = 0;
+      int brightness = 1;
       
      while (cmd != Turn_off_the_light) {
         if (cmd == Decrease_temperature) {
@@ -111,15 +86,15 @@ void LEDMatrixController::Turn_on_the_light() {
         }
         matrix.setBrightness(brightness);
         matrix.writeOnePicture(0xffffffffffffffff);
-	display();
+	      matrix.display();
 
-	cmd = this.getCommand();
+	      cmd = this->getCommand();
       }
     }
     brightness = 1 ; // Fonctionnalité éteindre la lumière
     matrix.setBrightness(brightness);
     matrix.writeOnePicture(0x0) ;
-    display() ;
+    matrix.display() ;
  }
 
 
@@ -132,19 +107,19 @@ void LEDMatrixController::Voice_drawing(){
       while ( cmd != Stop ){
         if (cmd == Go){
           matrix.writePixel(x,y,true);
-          display();
+          matrix.display();
         }
         else {
           //blink : permet de repérer le curseur
           matrix.writePixel(x,y,true);
-          display();
+          matrix.display();
           delay(100);
           matrix.writePixel(x,y,false);
-          display();
+          matrix.display();
           delay(50);
         }
 
-        cmd = this.getCommand();
+        cmd = this->getCommand();
 
         // Règle x si on veut déplacer le curseur à gauche
         if ( cmd == Left){

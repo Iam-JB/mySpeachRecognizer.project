@@ -9,13 +9,11 @@ VoiceRecognizer::~VoiceRecognizer() {
     // Destructeur
 }
 
-int VoiceRecongizer::getCommand() {
+int VoiceRecognizer::getCommand() {
+  char cmd;
     if(softSerial.available())
     {
         cmd = softSerial.read();
-    }
-    else {
-      throw 1 ;
     }
     return cmd ; // Traiter une exception si on ne passe pas dans le if
 }
