@@ -1,9 +1,7 @@
-#include <VoiceRecognizer.h>
-#include <LEDMatrixController.h>
-
 using namespace std ;
 
-int DisplayMyVoice() {
+void init(){
+  setupMatrix();
   try {
     // Création d'une instance de reconnaissance de commandes vocales
     VR = new VoiceRecognizer(2,3) ;
@@ -15,5 +13,8 @@ int DisplayMyVoice() {
     cout << "Aucune commande lue." << endl ;
   }
   
-  return 0 ;
+}
+
+void run() {
+  
 }
