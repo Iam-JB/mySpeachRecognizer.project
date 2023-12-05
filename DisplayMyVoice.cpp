@@ -15,6 +15,6 @@ void init(){
   
 }
 
-int run() {
+void run() {
   
 }
