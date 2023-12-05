@@ -2,7 +2,9 @@
 using namespace std ;
 
 void init(){
+  char cmd ;
   setupMatrix();
+  
   try {
     // Création d'une instance de reconnaissance de commandes vocales
     VR = new VoiceRecognizer(2,3) ;
@@ -13,11 +15,9 @@ void init(){
   catch (1) {
     cout << "Aucune commande lue." << endl ;
   }
-  
 }
 
 void run() {
-  char cmd ;
   cmd = getCommand() ;
 
   if (cmd == 9) { // Turn_on_the_TV
