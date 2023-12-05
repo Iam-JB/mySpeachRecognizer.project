@@ -1,4 +1,4 @@
-#include <LEDMatrixController.h>
+#include "LEDMatrixController.h"
 
 const uint64_t Emoji[] = 
 {
@@ -18,7 +18,7 @@ const uint64_t Carre[] = {
 };
 const int CARRE_LEN = sizeof(Carre)/8;
 
-const uint64_t* animation[] = { Emoji[], Carre[] };
+const uint64_t* animation[] = { Emoji, Carre };
 
 LEDMatrixController::LEDMatrixController(VoiceRecognizer* VR) {
   this->MyVoiceRecognizer = VR;
@@ -57,10 +57,10 @@ void LEDMatrixController::Turn_on_the_TV(){
         animation_index--; 
       }
     }
-    int Animation_Len = sizeof(*Animation[animation_index])/8;
+    int Animation_Len = sizeof(Animation[animation_index])/8;
     for (int i = 0;i < Animation_Len;i++){ // i dépend du nombre d'images de l'animation !
 
-        matrix.writeOnePicture(*Animation[animation_index]); // comment mettre l'animation i de l'emplacement pointé par Animation[] ?
+        matrix.writeOnePicture(Animation[animation_index][i]); // comment mettre l'animation i de l'emplacement pointé par Animation[] ?
 	display();
 	delay(300);
         }
