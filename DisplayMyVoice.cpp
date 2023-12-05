@@ -1,3 +1,4 @@
+
 using namespace std ;
 
 void init(){
@@ -16,5 +17,19 @@ void init(){
 }
 
 void run() {
-  
+  char cmd ;
+  cmd = getCommand() ;
+
+  if (cmd == 9) { // Turn_on_the_TV
+    Turn_on_the_TV() ;
+  }
+  else if (cmd == 1) { // Turn_on_the_light
+    Turn_on_the_light() ;
+  }
+  else if (cmd == 20) { // Voice_drawing
+    Voice_drawing() ;
+  }
+  else {
+    cout << "Commande non prise en charge" << endl ;
+  }
 }
