@@ -98,6 +98,8 @@ void LEDMatrixController::Turn_on_the_light() {
     display() ;
  }
 
+
+void LEDMatrixController::Voice_drawing(){
 //Control Vocal
     if ( cmd == Mode_1){
       uint8_t x=0;
@@ -160,3 +162,4 @@ void LEDMatrixController::Turn_on_the_light() {
 
       }
     }
+}
