@@ -2,11 +2,8 @@
 using namespace std ;
 
 void DisplayMyVoice::init(){
-  VR = new VoiceRecognizer(2,3) ;
-  LED = new LEDMatrixController(VR) ;
-  
+  DisplayMyVoice* DMV = new DisplayMyVoice() ;
   LED->setupMatrix(); // il faut une instance de matrice
- 
 }
 
 void DisplayMyVoice::run() {
