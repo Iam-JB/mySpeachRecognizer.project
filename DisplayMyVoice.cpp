@@ -1,15 +1,6 @@
 #include "DisplayMyVoice.h"
 using namespace std ;
 
-char comd ;
-
-
-// Création d'une instance de reconnaissance de commandes vocales
-VoiceRecognizer* VR ;
-  
-// Création d'une instance de matrice de LED
-LEDMatrixController* LED ;
-
 void DisplayMyVoice::init(){
   VR = new VoiceRecognizer(2,3) ;
   LED = new LEDMatrixController(VR) ;
