@@ -20,6 +20,8 @@ const int CARRE_LEN = sizeof(Carre)/8;
 
 const uint64_t* animation[] = { Emoji, Carre };
 
+int cmd;
+
 LEDMatrixController::LEDMatrixController(VoiceRecognizer* VR) {
   this->MyVoiceRecognizer = VR;
 }
@@ -37,7 +39,7 @@ void LEDMatrixController::setupMatrix() {
 
 void LEDMatrixController::Turn_on_TV(){
 
-  int cmd = 9;
+  cmd = 9;
   int animation_index = 0; 
   while (cmd != Turn_off_the_TV) {
     if (cmd == Next) {
@@ -63,14 +65,14 @@ void LEDMatrixController::Turn_on_TV(){
 	    matrix.display();
 	    delay(300);
     }
-    cmd = this->getCommand(); // il faut une instance de voice recognizer
+    cmd = this->MyVoiceRecognizer->getCommand(); // il faut une instance de voice recognizer
   }
       
 }
 
 void LEDMatrixController::Turn_on_light() {
 
-      int cmd = 1;
+      cmd = 1;
       int brightness = 1;
       
      while (cmd != Turn_off_the_light) {
@@ -88,21 +90,23 @@ void LEDMatrixController::Turn_on_light() {
         matrix.writeOnePicture(0xffffffffffffffff);
 	      matrix.display();
 
-	      cmd = this->getCommand();
+	      cmd = this->MyVoiceRecognizer->getCommand();
       }
+      brightness = 1 ; // Fonctionnalité éteindre la lumière
+      matrix.setBrightness(brightness);
+      matrix.writeOnePicture(0x000000000000001) ;
+      matrix.display() ;
     }
-    brightness = 1 ; // Fonctionnalité éteindre la lumière
-    matrix.setBrightness(brightness);
-    matrix.writeOnePicture(0x0) ;
-    matrix.display() ;
- }
+    
+ 
 
 
 void LEDMatrixController::Voice_drawing(){
 //Control Vocal
-    if ( cmd == Mode_1){
-      uint8_t x=0;
-      uint8_t y=0;
+
+  cmd = 20;
+  uint8_t x=0;
+  uint8_t y=0;
 
       while ( cmd != Stop ){
         if (cmd == Go){
@@ -119,7 +123,7 @@ void LEDMatrixController::Voice_drawing(){
           delay(50);
         }
 
-        cmd = this->getCommand();
+        cmd = this->MyVoiceRecognizer->getCommand();
 
         // Règle x si on veut déplacer le curseur à gauche
         if ( cmd == Left){
@@ -160,5 +164,5 @@ void LEDMatrixController::Voice_drawing(){
         }
 
       }
-    }
+    
 }

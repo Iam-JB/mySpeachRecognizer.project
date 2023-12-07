@@ -1,30 +1,37 @@
 #include "DisplayMyVoice.h"
 using namespace std ;
 
-void init(){
-  char cmd ;
+char comd ;
 
-  // Création d'une instance de reconnaissance de commandes vocales
-  VoiceRecognizer VR = new VoiceRecognizer(2,3) ;
+
+// Création d'une instance de reconnaissance de commandes vocales
+VoiceRecognizer* VR ;
   
-  // Création d'une instance de matrice de LED
-  LEDMatrixController LED = new LEDMatrixController(&VR) ;
-  LED.setupMatrix(); // il faut une instance de matrice
+// Création d'une instance de matrice de LED
+LEDMatrixController* LED ;
+
+void init(){
+  VR = new VoiceRecognizer(2,3) ;
+  LED = new LEDMatrixController(VR) ;
+  
+  LED->setupMatrix(); // il faut une instance de matrice
+ 
 }
 
 void run() {
-  cmd = getCommand() ;
 
-  if (cmd == 9) { // Turn_on_the_TV
-    Turn_on_TV() ;
+  comd = VR->getCommand() ;
+
+  if (comd == 9) { // Turn_on_the_TV
+    LED->Turn_on_TV() ;
   }
-  else if (cmd == 1) { // Turn_on_the_light
-    Turn_on_light() ;
+  else if (comd == 1) { // Turn_on_the_light
+    LED->Turn_on_light() ;
   }
-  else if (cmd == 20) { // Voice_drawing
-    Voice_drawing() ;
+  else if (comd == 20) { // Voice_drawing
+    LED->Voice_drawing() ;
   }
   else {
-    cout << "Commande non prise en charge" << endl ;
+    Serial.print("commande non prise en charge");
   }
 }
