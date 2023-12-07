@@ -2,6 +2,7 @@
 #define LEDMATRIXCONTROLLER_H
 #include <Arduino.h>
 #include <Wire.h>
+#include "VoiceRecognizer.h"
 #include "Grove_LED_Matrix_Driver_HT16K33.h"
 
 
@@ -16,8 +17,8 @@ public:
 
     // Fonctions
   void setupMatrix();
-  void Turn_on_the_TV();
-  void Turn_on_the_light();
+  void Turn_on_TV();
+  void Turn_on_light();
   void Voice_drawing();
 
 };
