@@ -15,8 +15,8 @@ private :
 
 public:
     // Constructeur & Destructeur
-    DisplayMyVoice();
-    ~DisplayMyVoice();
+    DisplayMyVoice(){ }
+    ~DisplayMyVoice(){ }
 
     // Fonctions
   void init();
