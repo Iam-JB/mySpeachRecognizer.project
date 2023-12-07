@@ -10,7 +10,7 @@ public:
     ~DisplayMyVoice();
 
     // Fonctions
-  void initialise();
+  void init();
   void run();
 
 };
