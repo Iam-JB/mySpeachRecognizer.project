@@ -10,7 +10,7 @@ VoiceRecognizer* VR ;
 // Création d'une instance de matrice de LED
 LEDMatrixController* LED ;
 
-void init(){
+void initialise(){
   VR = new VoiceRecognizer(2,3) ;
   LED = new LEDMatrixController(VR) ;
   
