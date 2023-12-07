@@ -5,7 +5,7 @@ DisplayMyVoice myApplication;
 void setup() 
 {
   // put your setup code here, to run once:
-  myApplication.init();
+  myApplication.initialise();
 }
 
 void loop() 
