@@ -4,6 +4,15 @@
 #include "VoiceRecognizer.h"
 
 class DisplayMyVoice {
+private :
+    char comd ;
+
+    // Création d'une instance de reconnaissance de commandes vocales
+    VoiceRecognizer* VR ;
+
+    // Création d'une instance de matrice de LED
+    LEDMatrixController* LED ;
+
 public:
     // Constructeur & Destructeur
     DisplayMyVoice();
@@ -12,7 +21,6 @@ public:
     // Fonctions
   void init();
   void run();
-
 };
 
 #endif
