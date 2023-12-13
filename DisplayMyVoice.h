@@ -20,7 +20,7 @@ public:
         VR = new VoiceRecognizer(2,3) ;
         LED = new LEDMatrixController(VR) ;
     }
-    ~DisplayMyVoice(){ }
+    ~DisplayMyVoice(){ delete LED ; delete VR ;}
 
     // Fonctions
   void init();
