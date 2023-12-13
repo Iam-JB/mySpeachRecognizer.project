@@ -7,19 +7,27 @@ void DisplayMyVoice::init(){
 }
 
 void DisplayMyVoice::run() {
+  
+  try {
+    comd = VR->getCommand() ;
 
-  comd = VR->getCommand() ;
-
-  if (comd == 9) { // Turn_on_the_TV
-    LED->Turn_on_TV() ;
+    if (comd == 9) { // Turn_on_the_TV
+      LED->Turn_on_TV() ;
+    }
+    else if (comd == 1) { // Turn_on_the_light
+      LED->Turn_on_light() ;
+    }
+    else if (comd == 20) { // Voice_drawing
+      LED->Voice_drawing() ;
+    }
+    else {
+      Serial.print("commande non prise en charge");
+    }
   }
-  else if (comd == 1) { // Turn_on_the_light
-    LED->Turn_on_light() ;
+  catch (int err) {
+    if (err == NO_CMD) {
+      Serial.print("Capteur vocal non disponible");
+    }
   }
-  else if (comd == 20) { // Voice_drawing
-    LED->Voice_drawing() ;
-  }
-  else {
-    Serial.print("commande non prise en charge");
-  }
+  
 }
