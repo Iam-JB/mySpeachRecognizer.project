@@ -1,4 +1,5 @@
 #include "DisplayMyVoice.h"
+#define NO_CMD -1
 using namespace std ;
 
 void DisplayMyVoice::init(){
